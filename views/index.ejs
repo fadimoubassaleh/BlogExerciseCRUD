@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+    body{
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
+    }    
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/posts" method="post">
+        <input type="text" placeholder="Title" name="title">
+        <br>
+        <textarea name="text" placeholder="Text" cols="50" rows="5"></textarea>
+        <br>
+        <input type="submit">
+    </form>
+
+    <ul class="posts">
+        <% for(var i=0; i<posts.length; i++) {%>
+            <div class="post">
+                <h3>
+                    <%= posts[i].title %>
+                </h3>
+                <p>
+                    <%= posts[i].text %>
+                </p>
+                <hr>
+            </div>
+            <% } %>
+    </ul>
+</body>
+
+</html>

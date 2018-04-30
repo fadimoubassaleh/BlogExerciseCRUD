@@ -3,15 +3,16 @@
 
 <head>
     <style>
-    body{
-        display: grid;
-        grid-template-columns: 0.5fr 1fr;
-    }    
+        body{
+            display: grid;
+            grid-template-columns: 0.5fr 1fr;
+        }    
     </style>
     <title>Document</title>
 </head>
 
 <body>
+    <!-- the form to submit a post to DB with action 'posts' -->
     <form action="/posts" method="post">
         <input type="text" placeholder="Title" name="title">
         <br>
@@ -20,6 +21,7 @@
         <input type="submit">
     </form>
 
+    <!-- post part it's for map the DB -->
     <ul class="posts">
         <% for(var i=0; i<posts.length; i++) {%>
             <div class="post">
@@ -31,7 +33,7 @@
                 </p>
                 <hr>
             </div>
-            <% } %>
+        <% } %>
     </ul>
 </body>
 

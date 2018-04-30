@@ -5,11 +5,13 @@ const MongoClient = require('mongodb').MongoClient
 var db
 
 
-// FUNCTIONS
+//           FUNCTIONS
+
+// to show the data from the posted form
 app.use(bodyParser.urlencoded({ extended: true }))
-
+// for render 'ejs' files
 app.set('view engine', 'ejs')
-
+// the method 'posts' to add post to DB
 app.post('/posts', (req, res) => {
     db.collection('postsdb').save(req.body, (err, result) => {
         if (err) return console.log(err)
@@ -20,7 +22,7 @@ app.post('/posts', (req, res) => {
     })
 })
 
-// GETS
+//          GETS
 app.get('/', (req, res) => {
     db.collection('postsdb').find().toArray(function (err, results) {
         if (err) return console.log(err)
@@ -28,7 +30,9 @@ app.get('/', (req, res) => {
     })
 })
 
-const port = 3001
+const port = 3001 // change your PORT here
+
+// runnig the server with the MONGODB and port
 MongoClient.connect('mongodb://fadi:123456789@ds263089.mlab.com:63089/omar-ex-blog', (err, client) => {
     if (err) return console.log(err)
     db = client.db('omar-ex-blog') // whatever your database name is

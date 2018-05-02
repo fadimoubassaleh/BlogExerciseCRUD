@@ -24,11 +24,18 @@ app.post('/posts', (req, res) => {
         res.redirect('/')
     })
 })
-// 
+// delete one of the list
+app.all('/delete/:id', (req, res) => {
+    id = req.params.id
+    console.log(id)
+    db.collection('postsdb').deleteOne({ _id: ObjectId(id) })
+    res.redirect('/')
+})
+// update one of the list
 app.post('/update/:id', (req, res) => {
     id = req.params.id
     db.collection('postsdb').findOneAndUpdate(
-        { _id: ObjectId(id) }, 
+        { _id: ObjectId(id) },
         { $set: { title: req.body.title, text: req.body.text } },
         res.redirect('/')
     )

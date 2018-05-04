@@ -27,7 +27,6 @@ app.post('/posts', (req, res) => {
 // delete one of the list
 app.all('/delete/:id', (req, res) => {
     id = req.params.id
-    console.log(id)
     db.collection('postsdb').deleteOne({ _id: ObjectId(id) })
     res.redirect('/')
 })
@@ -45,14 +44,12 @@ app.post('/update/:id', (req, res) => {
 app.get('/', (req, res) => {
     db.collection('postsdb').find().toArray(function (err, results) {
         if (err) return console.log(err)
-        console.log(results)
         res.render('index.ejs', { posts: results })
     })
 })
 app.all('/edit/:id', (req, res) => {
     id = req.params.id
     db.collection('postsdb').find({ _id: ObjectId(id) }).toArray(function (err, results) {
-        console.log(results)
         res.render('update.ejs', { post: results })
     })
 })

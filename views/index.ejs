@@ -3,10 +3,10 @@
 
 <head>
     <style>
-        body{
+        body {
             display: grid;
             grid-template-columns: 0.5fr 1fr;
-        }    
+        }
     </style>
     <title>Document</title>
 </head>
@@ -17,6 +17,8 @@
         <input type="text" placeholder="Title" name="title">
         <br>
         <textarea name="text" placeholder="Text" cols="50" rows="5"></textarea>
+        <br>
+        <input type="hidden" name="date" id="date">
         <br>
         <input type="submit">
     </form>
@@ -32,13 +34,29 @@
                 <p>
                     <%= posts[i].text %>
                 </p>
-                <a href="/edit/<%= posts[i]._id %>" > update </a>
-                <a href="/delete/<%= posts[i]._id %>" style="margin-left: 1.5%" > delete </a>
+                <a href="/edit/<%= posts[i]._id %>"> update </a>
+                <a href="/delete/<%= posts[i]._id %>" style="margin-left: 1.5%"> delete </a>
                 <hr>
             </div>
-        <% } %>
+            <% } %>
     </ul>
-    <script src='main.js'></script>
+    <script>
+        n = new Date(); // get current date
+        // formatting the date
+        h = n.getHours();
+        M = n.getMinutes();
+        y = n.getFullYear();
+        // getMonth() counts January as 0 so we need +1 
+        m = n.getMonth() + 1;
+        d = n.getDate();
+        //check if it's AM or PM
+        if (h < 12) {
+            document.getElementById("date").value = h + ":" + M + " AM " + m + "/" + d + "/" + y;
+        }
+        else {
+            document.getElementById("date").value = h + ":" + M + " PM " + m + "/" + d + "/" + y;
+        }
+    </script>
 </body>
 
 </html>

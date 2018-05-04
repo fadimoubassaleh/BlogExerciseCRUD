@@ -41,11 +41,24 @@ app.post('/update/:id', (req, res) => {
 })
 
 //          GETS
-app.get('/', (req, res) => {
-    db.collection('postsdb').find().toArray(function (err, results) {
-        if (err) return console.log(err)
-        res.render('index.ejs', { posts: results })
-    })
+app.get('/:sorting?', (req, res) => {
+    const sorting = req.params.sorting
+    if (!sorting || sorting == "default"){
+        db.collection('postsdb').find().toArray(function (err, results) {
+            if (err) return console.log(err)
+            res.render('index.ejs', { posts: results })
+        })
+    }else if (sorting == "title"){
+        db.collection('postsdb').find().sort({"title" : 1}).toArray(function (err, results) {
+            if (err) return console.log(err)
+            res.render('index.ejs', { posts: results })
+        })
+    }else if (sorting == "date"){
+        db.collection('postsdb').find().sort({"date" : -1}).toArray(function (err, results) {
+            if (err) return console.log(err)
+            res.render('index.ejs', { posts: results })
+        })
+    }
 })
 app.all('/edit/:id', (req, res) => {
     id = req.params.id
@@ -54,7 +67,7 @@ app.all('/edit/:id', (req, res) => {
     })
 })
 
-const port = 3001 // change your PORT here
+const port = 3000 // change your PORT here
 
 // runnig the server with the MONGODB and port
 MongoClient.connect('mongodb://fadi:123456789@ds263089.mlab.com:63089/omar-ex-blog', (err, client) => {

@@ -66,6 +66,12 @@ app.all('/edit/:id', (req, res) => {
         res.render('update.ejs', { post: results })
     })
 })
+app.all('/readmore/:id', (req, res) => {
+    id = req.params.id
+    db.collection('postsdb').find({ _id: ObjectId(id) }).toArray(function (err, results) {
+        res.render('readmore.ejs', { post: results })
+    })
+})
 
 const port = 3000 // change your PORT here
 

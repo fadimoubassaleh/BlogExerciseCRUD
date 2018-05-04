@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        form {
+            grid-column-start: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/" method="get">
+        <h3 type="text" name="title"><%= post[0].title %><h3/>
+        <p name="text" cols="50" rows="5">Text: <%= post[0].text %></p>
+        <p><%= post[0].date %></p>
+        <input type="submit" value="go home">
+    </form>
+</body>
+
+</html>
